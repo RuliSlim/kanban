@@ -16,19 +16,19 @@ class UserController {
       })
       .then(user => {
         const token = SignToken(user);
-        res.status(201).json({ token, username: user.username });
+        res.status(201).json({ access_token: token, username: user.username });
       })
       .catch(err => next(err));
   }
 
   static login(req, res, next) {
     const { password, email } = req.body;
-    User.findOne({ where: email })
+    User.findOne({ where: { email } })
       .then(user => {
         if(!user) throw new Error('User not found');
-        if(!comparePassword(password, user.password)) throw new Error('Email or Password does not match');
+        if(!comparePassword(password, user)) throw new Error('Email or Password does not match');
         const token = SignToken(user);
-        res.status(200).json({ token, username: user.username});
+        res.status(200).json({ acces_token: token, username: user.username});
       })
       .catch(err => next(err));
   }

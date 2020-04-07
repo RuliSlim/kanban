@@ -9,7 +9,7 @@ const SignToken = (user) => {
   }, process.env.JWT_SECRET, {expiresIn: '1h'})
 };
 
-const decodedToken = (user) => {
+const decodedToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET)
 };
 

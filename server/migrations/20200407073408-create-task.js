@@ -11,14 +11,20 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      desciption: {
+      description: {
         type: Sequelize.TEXT
+      },
+      status: {
+        type: Sequelize.BOOLEAN
       },
       UserId: {
         type: Sequelize.UUID
       },
       CategoryId: {
         type: Sequelize.INTEGER
+      },
+      organization: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
