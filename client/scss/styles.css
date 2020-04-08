@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0 0;
 }
 
@@ -131,11 +131,71 @@ body {
   font-size: 1rem;
   color: #11998e;
   font-weight: 700;
-}
+} */
 
 /* reset input */
-.form__field:required, .form__field:invalid {
+/* .form__field:required, .form__field:invalid {
   -webkit-box-shadow: none;
           box-shadow: none;
-}
+} */
 /*# sourceMappingURL=styles.css.map */
+
+
+/* Input field task */
+  .collection-item.avatar.input-task{
+    height: 50px !important;
+    padding: 0 2rem !important;
+    margin: 0 !important;
+    display: none;
+    animation: fade_in_show 1s;
+  }
+    /* display: add form */
+    @keyframes fade_in_show {
+      0% {
+            opacity: 0;
+            transform: scale(0)
+      }
+      100% {
+            opacity: 1;
+            transform: scale(1)
+      }
+  }
+
+  .input-field{
+    width: 100% !important;
+  }
+
+/* collection list task */ 
+  .collection{
+    border: 0;
+    border-radius: 2rem;
+    background-color: #ff8b94;
+    margin: 1.25rem 0;
+    height: auto !important;
+  }
+  .collection-item {
+    background-color: #ff8b94;
+    margin: 1.25rem 0;
+    padding: 1rem;
+    height: 130px !important;
+    overflow: hidden;
+  }
+  /* icons */ 
+  .iconOption {
+    color: #a8e6cf;
+    margin-top: -50px;
+    margin-bottom: -50px;
+  } 
+  .collection .collection-item.avatar .secondary-content {
+    position: absolute;
+    right: 30px;
+  }
+
+  .avatar .options-task{
+    display: none;
+    positions: relative !important;
+  }
+  .avatar:hover > .options-task{
+    display: block;
+  }
+/*    */
