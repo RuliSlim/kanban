@@ -127,55 +127,96 @@ _Response (200)_
 [
   {
       "id": 2,
-      "title": "judul task 2",
-      "description": null,
-      "status": false,
-      "UserId": "04e37673-d3cb-432e-9eb6-e4c45b901bdc",
-      "CategoryId": 1,
-      "organization": "Hacktiv8",
-      "createdAt": "2020-04-07T12:06:36.639Z",
-      "updatedAt": "2020-04-07T12:06:36.639Z",
-      "User": {
-          "id": "04e37673-d3cb-432e-9eb6-e4c45b901bdc",
-          "username": "jokocuy",
-          "email": "joko@email.com",
-          "password": "$2b$10$MZBJJMKWc26ukg7xh/hiO.2jmbCsMYs8IMNNZtROqMtG2PerpwwKy",
-          "organization": "Hacktiv8",
-          "createdAt": "2020-04-07T11:33:55.347Z",
-          "updatedAt": "2020-04-07T11:33:55.347Z"
-      },
-      "Category": {
-          "id": 1,
-          "name": "Backlog",
-          "createdAt": "2020-04-07T12:08:21.961Z",
-          "updatedAt": "2020-04-07T12:08:21.961Z"
-      }
+      "name": "Development",
+      "Tasks": [
+          {
+              "id": 1,
+              "title": "judul task 1",
+              "description": "ini deskripsi pake category",
+              "status": false,
+              "UserId": "ae0e5b5b-4dba-4a23-a5af-8a13a0cb5c9a",
+              "CategoryId": 2,
+              "organization": "Hacktiv8",
+              "createdAt": "2020-04-07T16:05:31.609Z",
+              "updatedAt": "2020-04-07T16:05:31.609Z",
+              "User": {
+                  "username": "jokocuy",
+                  "organization": "Hacktiv8"
+              }
+          },
+          {
+              "id": 2,
+              "title": "judul task 2",
+              "description": "ini deskripsi pake category",
+              "status": false,
+              "UserId": "ae0e5b5b-4dba-4a23-a5af-8a13a0cb5c9a",
+              "CategoryId": 2,
+              "organization": "Hacktiv8",
+              "createdAt": "2020-04-07T16:05:33.149Z",
+              "updatedAt": "2020-04-07T16:05:33.149Z",
+              "User": {
+                  "username": "jokocuy",
+                  "organization": "Hacktiv8"
+              }
+          }
+      ]
+  },
+  {
+      "id": 3,
+      "name": "Product",
+      "Tasks": [
+          {
+              "id": 5,
+              "title": "judul task 5",
+              "description": "ini deskripsi pake category",
+              "status": false,
+              "UserId": "ae0e5b5b-4dba-4a23-a5af-8a13a0cb5c9a",
+              "CategoryId": 3,
+              "organization": "Hacktiv8",
+              "createdAt": "2020-04-07T16:46:38.161Z",
+              "updatedAt": "2020-04-07T16:46:38.161Z",
+              "User": {
+                  "username": "jokocuy",
+                  "organization": "Hacktiv8"
+              }
+          }
+      ]
   },
   {
       "id": 1,
-      "title": "judul task",
-      "description": null,
-      "status": false,
-      "UserId": "04e37673-d3cb-432e-9eb6-e4c45b901bdc",
-      "CategoryId": 3,
-      "organization": "Hacktiv8",
-      "createdAt": "2020-04-07T11:34:06.931Z",
-      "updatedAt": "2020-04-07T12:36:56.565Z",
-      "User": {
-          "id": "04e37673-d3cb-432e-9eb6-e4c45b901bdc",
-          "username": "jokocuy",
-          "email": "joko@email.com",
-          "password": "$2b$10$MZBJJMKWc26ukg7xh/hiO.2jmbCsMYs8IMNNZtROqMtG2PerpwwKy",
-          "organization": "Hacktiv8",
-          "createdAt": "2020-04-07T11:33:55.347Z",
-          "updatedAt": "2020-04-07T11:33:55.347Z"
-      },
-      "Category": {
-          "id": 3,
-          "name": "Product",
-          "createdAt": "2020-04-07T12:08:21.961Z",
-          "updatedAt": "2020-04-07T12:08:21.961Z"
-      }
+      "name": "Backlog",
+      "Tasks": [
+          {
+              "id": 6,
+              "title": "judul task 6",
+              "description": "ini deskripsi pake category",
+              "status": false,
+              "UserId": "ae0e5b5b-4dba-4a23-a5af-8a13a0cb5c9a",
+              "CategoryId": 1,
+              "organization": "Hacktiv8",
+              "createdAt": "2020-04-07T16:46:43.703Z",
+              "updatedAt": "2020-04-07T16:46:43.703Z",
+              "User": {
+                  "username": "jokocuy",
+                  "organization": "Hacktiv8"
+              }
+          },
+          {
+              "id": 7,
+              "title": "judul task 7",
+              "description": "ini deskripsi pake category",
+              "status": false,
+              "UserId": "ae0e5b5b-4dba-4a23-a5af-8a13a0cb5c9a",
+              "CategoryId": 1,
+              "organization": "Hacktiv8",
+              "createdAt": "2020-04-07T16:46:46.565Z",
+              "updatedAt": "2020-04-07T16:46:46.565Z",
+              "User": {
+                  "username": "jokocuy",
+                  "organization": "Hacktiv8"
+              }
+          }
+      ]
   }
 ]
 ```

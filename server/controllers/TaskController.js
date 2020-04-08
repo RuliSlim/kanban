@@ -2,15 +2,23 @@ const { Task, User, Category } = require('../models');
 
 class TaskController {
   static getAll(req, res, next) {
-    Task.findAll({ 
-      where: {
-        organization: req.user.organization
-      },
-      include: [{all: true}]
+    let foundTasks
+    Category.findAll({ 
+      include: [
+        {
+          model: Task,
+          where: {
+            organization: req.user.organization
+          },
+          // attributes: [''],
+          include: [{model: User, attributes: ['username', 'organization']}]
+        }
+      ], 
+      attributes: ['id', 'name'],
   })
-      .then(tasks => {
-        if(!tasks.length) return res.status(200).json({tasks: 'You dont have task yet.'});
-        res.status(200).json(tasks);
+      .then(cate => {
+        if(!cate.length) return res.status(200).json({tasks: 'You dont have task yet.'});
+        res.status(200).json(cate);
       })
       .catch(err => next(err));
   }
