@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <div v-if="error">
-      <span class="toast" id="toast">
-        {{error}}
-        <a href="" @click.prevent="closeToast" style="color: red; position: absolute; top: -50%; right: -20%;"><i class="material-icons" id="toast-close">close</i>close</a>
-      </span>
-    </div>
     <div class="row" v-for="(catRow, idx) in listEachRow" :key="idx">
       <div class="col s12 m6 l4" v-for="(cat, i) in catRow" :key="cat.id">
         <ul class="collection with-header" >
@@ -29,7 +23,8 @@
             </div>
           </li>
           <!-- -->
-          <Card :catTasks="cat.Tasks" @emitUpdate="updateTask($event)" @emitDelete="deleteTask($event)"/>
+          <Card :catTasks="cat.Tasks" @emitUpdate="updateTask($event)" @emitDelete="deleteTask($event)"/></Card>
+
         </ul>
       </div>
     </div>
@@ -76,7 +71,6 @@ export default {
         this.showForm[index] = !this.showForm[index];
       }
       if(this.showForm[index]) {
-        console.log(this.$refs.cats, 'cats')
         this.$refs.cats.forEach((el, idx) => {
           if(idx != index) {
             el.style.display = 'none';
@@ -113,7 +107,7 @@ export default {
         })
       })
       .catch((err) => {
-        this.error = `${err.response.data.message}`;
+        this.$toasted.error(err.response.data.message, {duration: 3000});
       })
     },
     createTask(idx, id) {
@@ -130,13 +124,13 @@ export default {
         data: formdata, 
         headers: {access_token: this.token} 
       })
-        .then(() => {
+        .then((res) => {
           this.getAll();
           this.newTitle = '';
-          this.error = null;
+          this.$toasted.success(`Succesfully create ${res.data.task.title}`, {duration: 3000});
         })
         .catch(err => {
-          this.error = `${err.response.data.message}`
+          this.$toasted.error(err.response.data.message, {duration: 3000});
         });
     },
     updateTask(datas) {
@@ -149,12 +143,12 @@ export default {
           access_token: this.token
         }
       })
-        .then(() => {
+        .then((res) => {
           this.getAll();
-          this.error = null;
+          this.$toasted.success(`Succesfully update ${res.data[1][0].title}`, {duration: 3000});
         })
         .catch(err => {
-          this.error = `${err.response.data.message}`
+          this.$toasted.error(err.response.data.message, {duration: 3000});
           this.getAll();
         })
     },
@@ -164,18 +158,14 @@ export default {
         url: base_url + '/' + id, 
         headers: {access_token: this.token}
       })
-        .then(() => {
+        .then((res) => {
           this.getAll(); 
-          this.error = null;
+          this.$toasted.success(`Succesfully delete ${res.data.title}`, {duration: 3000});
         })
         .catch(err => {
-          this.error = `${err.response.data.message}`;
+          this.$toasted.error(err.response.data.message, {duration: 3000});
           this.getAll();
         })
-    },
-    // error basic handler
-    closeToast(){
-      this.error = null;
     },
     // function to split category
     chunkArray(myArray, chunk_size){

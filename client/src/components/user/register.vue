@@ -4,34 +4,31 @@
       <ul class="collection with-header">
         <li class="collection-item avatar">
             <form class="row" @submit.prevent="login">
+              <div id="google-signin-button"class="circle"></div>
               <div class="col s12">
                 <div class="input-field row inputRow">
                   <i class="material-icons prefix">account_circle</i>
-                  <input id="icon_prefix" type="text" class="validate" v-model="username">
+                  <input id="icon_prefix" type="text" class="validate" v-model="username" required>
                   <label for="icon_prefix">Username</label>
                 </div>
                 <div class="input-field row inputRow">
-                  <i class="material-icons prefix">account_circle</i>
-                  <input id="icon_prefix" type="email" class="validate" v-model="email">
-                  <label for="icon_prefix">Email</label>
+                  <i class="material-icons prefix">email</i>
+                  <input id="email_prefix" type="email" class="validate" v-model="email" required>
+                  <label for="email_prefix">Email</label>
                 </div>
                 <div class="input-field row inputRow">
                   <i class="material-icons prefix">phone</i>
-                  <input id="icon_telephone" type="password" class="validate" v-model="password">
+                  <input id="icon_telephone" type="password" class="validate" v-model="password" required>
                   <label for="icon_telephone">Password</label>
                 </div>
                 <div class="input-field row inputRow">
-                  <button class="btn-floating btn-large waves-effect waves-light" type="submit">Login</button>
+                  <button class="btn-floating btn-large waves-effect waves-light pulse" type="submit">Submit</button>
                 </div>
               </div>
             </form>
           <div class="secondary-content options-task flex" id="other-options" @click="showOther">
               <div class="row">
                 <button class="btn waves-effect waves-light" type="submit" name="action" ref="other1" @click="showForm('login')">Login
-                </button>
-              </div>
-              <div class="row">
-                <button class="btn waves-effect waves-light" type="submit" name="action" ref="other2" @click="showForm('google')">Google
                 </button>
               </div>
           </div>
@@ -53,6 +50,11 @@ export default {
       username: null
     }
   },
+  mounted() {
+    gapi.signin2.render('google-signin-button', {
+      onsuccess: this.onSignIn
+    })
+  },
   methods: {
     login() {
       let data = {}
@@ -61,6 +63,11 @@ export default {
       data.username = this.username;
       this.axios(data, 'register')
       // console.log(this.email, this.password);
+    },
+    onSignIn (user) {
+      let data = {}
+      data.token = user.getAuthResponse().id_token;
+      this.axios(data, 'google');
     },
     showOther(){
       if(this.$refs.other1.style.display == 'none') {
@@ -86,16 +93,14 @@ export default {
         data: data
       })
         .then(res => {
-          // this.saveData(data);
           this.loggedIn = true;
           localStorage.setItem('access_token', res.data.access_token);
           localStorage.setItem('username', res.data.username);
           self.$emit('emitToken', this.loggedIn);
-          console.log(res.data, 'token')
+          this.$toasted.success(res.data.username, {duration: 3000});
         })
         .catch(err => {
-          console.log('Yo')
-          console.log(err.response.data.message)
+          this.$toasted.error(err.response.data.message, {duration: 3000})
         })
     }
   }
@@ -103,124 +108,55 @@ export default {
 </script>
 
 <style scoped>
-/* Toast */
-.toast{
-  font-weight: 300;
-  font-size: 1.5rem;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  border-radius: 2rem;
-  animation: fade_in_show2 2s;
+ul.collection.with-header{
+  margin-top: 20% !important;
 }
-
-/* Input field task */
-  .collection-item.avatar.input-task{
-    height: 50px !important;
-    padding: 0 2rem !important;
-    width: 95%;
-    display: none;
-    animation: fade_in_show 1s;
-  }
-    /* display: add form */
-    @keyframes fade_in_show {
-      0% {
-        opacity: 0;
-        transform: scale(0)
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-  }
-
-  input.validate{
-    width: 100% !important;
-    border-bottom: 1px solid #dcedc1;
-  }
-
-  button#submit{
-    float: right;
-    position: absolute;
-    right: 2px;
-  }
-
-  /* add task*/
-  #add-task{
-    float: right;
-    margin-top: 40px;
-  }
-
-/* collection list task */ 
-  .collection.with-header .collection-header{
-    background-color: #ffaaa5;
-  }
-  .title:disabled{
-    border: none;
-    opacity: 1;
-    color: white;
-  }
-  .collection{
-    border: 0;
-    border-radius: 2rem;
-    background-color:  #ffd3b6;
-    margin: 1.25rem 0;
-    height: auto !important;
-  }
-  .collection-item {
-    background-color: #ffd3b6;
-    margin: 1.25rem 0;
-    padding: 1rem;
-    height: auto !important;
-    overflow: hidden;
-  }
-  .collection-item form{
-    width: 80%;
-  }
-  input.validate{
-    width: 80% !important;
-  }
-  /* icons collection*/ 
-  .iconOption {
-    margin-top: -50px;
-    margin-bottom: -50px;
-  } 
-  i {
-    color: #a8e6cf;
-  }
-  .collection .collection-item.avatar .secondary-content {
-    position: absolute;
-    right: 30px;
-  }
-  .flex{
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
-  }
-
-  .avatar .options-task#other-options{
-    display: block;
-    positions: absolute !important;
-    right: 0px;
-    border: 3px solid #dcedc1;
-    background-color:  #dcedc1;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    height: 190px;
-  }
-
-  #other-options div button{
-    position: relative;
-    top: 50px;
-    width: 95%;
-    text-align: center;
-    display: none;
-  }
-
-  #other-options:hover{
-    cursor: pointer;
-    display: block;
-  }
-/*    */
+input.validate{
+  width: 100% !important;
+  border-bottom: 1px solid #dcedc1 !important;
+}
+.collection{
+  border: 0 !important;
+  border-radius: 2rem !important;
+  background-color:  #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  height: auto !important;
+}
+.collection-item {
+  background-color: #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  padding: 1rem !important;
+  height: auto !important;
+  overflow: hidden;
+}
+.collection-item form{
+  width: 80% !important;
+}
+input.validate{
+  width: 80% !important;
+}
+i {
+  color: #a8e6cf !important;
+}
+.avatar .options-task#other-options{
+  display: block ;
+  /* position: absolute !important;
+  right: 0px !important; */
+  border: 13px solid #dcedc1 !important;
+  background-color:  #dcedc1 !important;
+  border-top-left-radius: 2rem !important;
+  border-bottom-left-radius: 2rem !important;
+  height: 190px !important;
+}
+#other-options div button{
+  position: relative !important;
+  top: 40px !important;
+  width: 95% !important;
+  text-align: center !important;
+  display: none ;
+}
+#other-options:hover{
+  cursor: pointer !important;
+  display: block ;
+}
 </style>

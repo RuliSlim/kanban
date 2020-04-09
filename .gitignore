@@ -2,3 +2,6 @@
 /server/.env
 /server/config/config.json
 /client/node_modules
+/client/dist
+/client/public/dist
+/client/public/.cache

@@ -33,7 +33,6 @@ export default {
       data.title = datas;
       let newData = {id, data};
       this.$emit('emitUpdate', newData);
-      // this.$parent.updateTask(id, updateData);
     }
   }
 }
@@ -76,6 +75,9 @@ export default {
     border: none;
     opacity: 1;
     color: white;
+  }
+  .title{
+    font-size: 1.5rem !important;
   }
   .collection{
     border: 0;

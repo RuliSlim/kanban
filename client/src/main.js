@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Toasted from 'vue-toasted';
+Vue.use(Toasted);
 // import VueMaterial from 'vue-material';
 // import 'vue-material/dist/vue-material.css';
 // Vue.use(VueMaterial);
@@ -13,8 +15,6 @@ new Vue({
 // npm i vue-toasted
 
 // ---main.js
-// import Toasted from 'vue-toasted';
-// Vue.use(Toasted);
 
 
 // ---manggil

@@ -33,6 +33,9 @@ button#submit[data-v-eb047d]{
     opacity: 1;
     color: white;
 }
+.title[data-v-eb047d]{
+    font-size: 1.5rem !important;
+}
 .collection[data-v-eb047d]{
     border: 0;
     border-radius: 2rem;
@@ -187,233 +190,159 @@ ul[data-v-719b1b] {
   width: 100%;
   height: 100%;
 }
-/* Toast */
-.toast[data-v-674164]{
-  font-weight: 300;
-  font-size: 1.5rem;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  border-radius: 2rem;
-  animation: fade_in_show2 2s;
-}
-
 /* Input field task */
-.collection-item.avatar.input-task[data-v-674164]{
-    height: 50px !important;
-    padding: 0 2rem !important;
-    width: 95%;
-    display: none;
-    animation: fade_in_show-data-v-674164 1s;
-}
-    /* display: add form */
-@keyframes fade_in_show-data-v-674164 {
-0% {
-        opacity: 0;
-        transform: scale(0)
-}
-100% {
-        opacity: 1;
-        transform: scale(1)
-}
+ul.collection.with-header[data-v-674164]{
+  margin-top: 20% !important;
 }
 input.validate[data-v-674164]{
-    width: 100% !important;
-    border-bottom: 1px solid #dcedc1;
-}
-button#submit[data-v-674164]{
-    float: right;
-    position: absolute;
-    right: 2px;
-}
-
-  /* add task*/
-#add-task[data-v-674164]{
-    float: right;
-    margin-top: 40px;
-}
-
-/* collection list task */
-.collection.with-header .collection-header[data-v-674164]{
-    background-color: #ffaaa5;
-}
-.title[data-v-674164]:disabled{
-    border: none;
-    opacity: 1;
-    color: white;
+  width: 100% !important;
+  border-bottom: 1px solid #dcedc1 !important;
 }
 .collection[data-v-674164]{
-    border: 0;
-    border-radius: 2rem;
-    background-color:  #ffd3b6;
-    margin: 1.25rem 0;
-    height: auto !important;
+  border: 0 !important;
+  border-radius: 2rem !important;
+  background-color:  #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  height: auto !important;
 }
 .collection-item[data-v-674164] {
-    background-color: #ffd3b6;
-    margin: 1.25rem 0;
-    padding: 1rem;
-    height: auto !important;
-    overflow: hidden;
+  background-color: #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  padding: 1rem !important;
+  height: auto !important;
+  overflow: hidden;
 }
 .collection-item form[data-v-674164]{
-    width: 80%;
+  width: 80% !important;
 }
 input.validate[data-v-674164]{
-    width: 80% !important;
-}
-  /* icons collection*/
-.iconOption[data-v-674164] {
-    margin-top: -50px;
-    margin-bottom: -50px;
+  width: 80% !important;
 }
 i[data-v-674164] {
-    color: #a8e6cf;
-}
-.collection .collection-item.avatar .secondary-content[data-v-674164] {
-    position: absolute;
-    right: 30px;
-}
-.flex[data-v-674164]{
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
+  color: #a8e6cf !important;
 }
 .avatar .options-task#other-options[data-v-674164]{
-    display: block;
-    positions: absolute !important;
-    right: 0px;
-    border: 3px solid #dcedc1;
-    background-color:  #dcedc1;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    height: 190px;
+  display: block ;
+  /* position: absolute !important;
+  right: 0px !important; */
+  border: 13px solid #dcedc1 !important;
+  background-color:  #dcedc1 !important;
+  border-top-left-radius: 2rem !important;
+  border-bottom-left-radius: 2rem !important;
+  height: 190px !important;
 }
 #other-options div button[data-v-674164]{
-    position: relative;
-    top: 50px;
-    width: 95%;
-    text-align: center;
-    display: none;
+  position: relative !important;
+  top: 40px !important;
+  width: 95% !important;
+  text-align: center !important;
+  display: none ;
 }
 #other-options[data-v-674164]:hover{
-    cursor: pointer;
-    display: block;
+  cursor: pointer !important;
+  display: block ;
 }
-/*    */
-/* Toast */
-.toast[data-v-96a0b9]{
-  font-weight: 300;
-  font-size: 1.5rem;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  border-radius: 2rem;
-  animation: fade_in_show2 2s;
-}
-
-/* Input field task */
-.collection-item.avatar.input-task[data-v-96a0b9]{
-    height: 50px !important;
-    padding: 0 2rem !important;
-    width: 95%;
-    display: none;
-    animation: fade_in_show-data-v-96a0b9 1s;
-}
-    /* display: add form */
-@keyframes fade_in_show-data-v-96a0b9 {
-0% {
-        opacity: 0;
-        transform: scale(0)
-}
-100% {
-        opacity: 1;
-        transform: scale(1)
-}
+ul.collection.with-header[data-v-96a0b9]{
+  margin-top: 20% !important;
 }
 input.validate[data-v-96a0b9]{
-    width: 100% !important;
-    border-bottom: 1px solid #dcedc1;
-}
-button#submit[data-v-96a0b9]{
-    float: right;
-    position: absolute;
-    right: 2px;
-}
-
-  /* add task*/
-#add-task[data-v-96a0b9]{
-    float: right;
-    margin-top: 40px;
-}
-
-/* collection list task */
-.collection.with-header .collection-header[data-v-96a0b9]{
-    background-color: #ffaaa5;
-}
-.title[data-v-96a0b9]:disabled{
-    border: none;
-    opacity: 1;
-    color: white;
+  width: 100% !important;
+  border-bottom: 1px solid #dcedc1 !important;
 }
 .collection[data-v-96a0b9]{
-    border: 0;
-    border-radius: 2rem;
-    background-color:  #ffd3b6;
-    margin: 1.25rem 0;
-    height: auto !important;
+  border: 0 !important;
+  border-radius: 2rem !important;
+  background-color:  #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  height: auto !important;
 }
 .collection-item[data-v-96a0b9] {
-    background-color: #ffd3b6;
-    margin: 1.25rem 0;
-    padding: 1rem;
-    height: auto !important;
-    overflow: hidden;
+  background-color: #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  padding: 1rem !important;
+  height: auto !important;
+  overflow: hidden;
 }
 .collection-item form[data-v-96a0b9]{
-    width: 80%;
+  width: 80% !important;
 }
 input.validate[data-v-96a0b9]{
-    width: 80% !important;
-}
-  /* icons collection*/
-.iconOption[data-v-96a0b9] {
-    margin-top: -50px;
-    margin-bottom: -50px;
+  width: 80% !important;
 }
 i[data-v-96a0b9] {
-    color: #a8e6cf;
-}
-.collection .collection-item.avatar .secondary-content[data-v-96a0b9] {
-    position: absolute;
-    right: 30px;
-}
-.flex[data-v-96a0b9]{
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
+  color: #a8e6cf !important;
 }
 .avatar .options-task#other-options[data-v-96a0b9]{
-    display: block;
-    positions: absolute !important;
-    right: 0px;
-    border: 3px solid #dcedc1;
-    background-color:  #dcedc1;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    height: 190px;
+  display: block ;
+  /* position: absolute !important;
+  right: 0px !important; */
+  border: 13px solid #dcedc1 !important;
+  background-color:  #dcedc1 !important;
+  border-top-left-radius: 2rem !important;
+  border-bottom-left-radius: 2rem !important;
+  height: 190px !important;
 }
 #other-options div button[data-v-96a0b9]{
-    position: relative;
-    top: 50px;
-    width: 95%;
-    text-align: center;
-    display: none;
+  position: relative !important;
+  top: 40px !important;
+  width: 95% !important;
+  text-align: center !important;
+  display: none ;
 }
 #other-options[data-v-96a0b9]:hover{
-    cursor: pointer;
-    display: block;
+  cursor: pointer !important;
+  display: block ;
 }
-/*    */
+/* Input field task */
+ul.collection.with-header[data-v-5f9ed7]{
+  margin-top: 20% !important;
+  height: 500px !important;
+}
+input.validate[data-v-5f9ed7]{
+  width: 100% !important;
+  border-bottom: 1px solid #dcedc1 !important;
+}
+.collection[data-v-5f9ed7]{
+  border: 0 !important;
+  border-radius: 2rem !important;
+  background-color:  #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  height: auto !important;
+}
+.collection-item[data-v-5f9ed7] {
+  background-color: #ffd3b6 !important;
+  margin: 1.25rem 0 !important;
+  padding: 1rem !important;
+  height: auto !important;
+  overflow: hidden;
+}
+.collection-item form[data-v-5f9ed7]{
+  width: 80% !important;
+}
+input.validate[data-v-5f9ed7]{
+  width: 80% !important;
+}
+i[data-v-5f9ed7] {
+  color: #a8e6cf !important;
+}
+.avatar .options-task#other-options[data-v-5f9ed7]{
+  display: block ;
+  /* position: absolute !important;
+  right: 0px !important; */
+  border: 13px solid #dcedc1 !important;
+  background-color:  #dcedc1 !important;
+  border-top-left-radius: 2rem !important;
+  border-bottom-left-radius: 2rem !important;
+  height: 190px !important;
+}
+#other-options div button[data-v-5f9ed7]{
+  position: relative !important;
+  top: 40px !important;
+  width: 95% !important;
+  text-align: center !important;
+  display: none ;
+}
+#other-options[data-v-5f9ed7]:hover{
+  cursor: pointer !important;
+  display: block ;
+}
