@@ -28,7 +28,7 @@ class UserController {
         if(!user) throw new Error('User not found');
         if(!comparePassword(password, user)) throw new Error('Email or Password does not match');
         const token = SignToken(user);
-        res.status(200).json({ acces_token: token, username: user.username});
+        res.status(200).json({ access_token: token, username: user.username});
       })
       .catch(err => next(err));
   }
