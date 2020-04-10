@@ -10,3 +10,4 @@
 .cache
 .firebaserc
 firebase.json
+.vscode
