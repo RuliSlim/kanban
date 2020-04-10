@@ -14,7 +14,7 @@
 import axios from "axios";
 import Category from './card/Category.vue';
 
-let base_url = "http://localhost:3000/";
+let base_url = "https://kanbaaam.herokuapp.com/";
 let token = localStorage.getItem("access_token");
 
 export default {

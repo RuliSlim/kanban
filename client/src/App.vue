@@ -3,7 +3,7 @@
     <NavBar :isLogin="isLogin" @emitLogout="logOut" :withGoogle="withGoogle"></NavBar>
     <Login v-if="!isLogin && formLogin" @emitToken="isLogin=true" :isLogin="isLogin" 
       @emitIsRegister="formRegister = !formRegister; formLogin = false;"
-      @emitWithGoogle="withGoogle = true;"
+      @emitWithGoogle="isLogin=true"
     >
     </Login>
     <Register v-if="!isLogin && formRegister" @emitToken="isLogin=true" :isLogin="isLogin"

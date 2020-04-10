@@ -40,7 +40,7 @@
 
 <script>
 import axios from 'axios'
-let base_url = "http://localhost:3000/user/"
+let base_url = "https://kanbaaam.herokuapp.com/user/"
 export default {
   name: 'Register',
   data() {

@@ -8,3 +8,5 @@
 /client/public/dist
 /client/public/.cache
 .cache
+.firebaserc
+firebase.json

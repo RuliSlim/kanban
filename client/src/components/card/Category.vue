@@ -32,7 +32,7 @@
 import Card from './Card.vue'
 import axios from "axios";
 
-let base_url = "http://localhost:3000/tasks";
+let base_url = "https://kanbaaam.herokuapp.com/tasks";
 let token = localStorage.getItem("access_token");
 
 

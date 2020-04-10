@@ -40,7 +40,7 @@ export default {
     editOne(id) {
     axios({
       methods: 'get',
-      url: 'http://localhost:3000/categories'
+      url: 'https://kanbaaam.herokuapp.com/categories'
     })
       .then(res => {
         this.cats = res.data;

@@ -3,8 +3,10 @@
     <div class="container">
       <ul class="collection with-header">
         <li class="collection-item avatar">
+            <button class="circle prefix" v-on:click="google">
+              <i class="fab fa-google">G</i>
+            </button>
             <form class="row" @submit.prevent="login">
-              <div id="google-signin-button"class="circle"></div>
               <div class="col s12">
                 <div class="input-field row inputRow">
                   <i class="material-icons prefix">email</i>
@@ -35,7 +37,7 @@
 
 <script>
 import axios from 'axios'
-let base_url = "http://localhost:3000/user/"
+let base_url = "https://kanbaaam.herokuapp.com/user/"
 export default {
   name: 'Login',
   data() {
@@ -45,9 +47,6 @@ export default {
     }
   },
   mounted() {
-    gapi.signin2.render('google-signin-button', {
-      onsuccess: this.onSignIn
-    })
   },
   methods: {
     login() {
@@ -56,11 +55,32 @@ export default {
       data.password = this.password;
       this.axios(data, 'login');
     },
-    onSignIn (user) {
-      let data = {}
-      data.token = user.getAuthResponse().id_token;
-      this.axios(data, 'google');
-      this.$emit('emitWithGoogle');
+    google(user) {
+      console.log('masuk')
+      this.$gAuth
+        .signIn()
+        .then(GoogleUser => {
+          let self = this;
+          axios({
+            method: "post",
+            url: "https://kanbaaam.herokuapp.com/user/google",
+            data: {
+              token: GoogleUser.getAuthResponse().id_token
+            }
+          })
+          .then(function(response) {
+              localStorage.setItem("access_token", response.data.access_token);
+              localStorage.setItem("user",response.data.email);
+              self.$emit('emitWithGoogle');
+          })
+          .catch(err => {
+            this.$toasted.error(err.response.data.message, {duration: 3000});
+          });
+        })
+        .catch(err => {
+          console.log(err)
+          this.$toasted.error(err.response.data.message, {duration: 3000})});
+      
     },
     showOther(){
       if(this.$refs.other1.style.display == 'none') {
