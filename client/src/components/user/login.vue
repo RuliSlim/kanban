@@ -60,6 +60,7 @@ export default {
       let data = {}
       data.token = user.getAuthResponse().id_token;
       this.axios(data, 'google');
+      this.$emit('emitWithGoogle');
     },
     showOther(){
       if(this.$refs.other1.style.display == 'none') {
@@ -79,6 +80,7 @@ export default {
     },
     axios(data, url) {
       let self = this;
+      let urlG = url
       axios({
         method: "POST",
         url: base_url + url,

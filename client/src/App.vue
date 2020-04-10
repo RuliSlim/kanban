@@ -1,18 +1,15 @@
 <template>
   <div>
-    <NavBar :isLogin="isLogin" @emitLogout="logOut"></NavBar>
+    <NavBar :isLogin="isLogin" @emitLogout="logOut" :withGoogle="withGoogle"></NavBar>
     <Login v-if="!isLogin && formLogin" @emitToken="isLogin=true" :isLogin="isLogin" 
-      @emitIsRegister="formRegister = !formRegister; formLogin = false; formGoogle = false" @emitIsGoogle="formGoogle = !formGoogle; formLogin = false; formRegister = false"
+      @emitIsRegister="formRegister = !formRegister; formLogin = false;"
+      @emitWithGoogle="withGoogle = true;"
     >
     </Login>
     <Register v-if="!isLogin && formRegister" @emitToken="isLogin=true" :isLogin="isLogin"
-      @emitIsLogin="formLogin = !formLogin; formRegister = false; formGoogle = false" @emitIsGoogle="formGoogle = !formGoogle; formRegister = false; formLogin = false"
+      @emitIsLogin="formLogin = !formLogin; formRegister = false;" 
     >
     </Register>
-    <Google v-if="!isLogin && formGoogle" @emitToken="isLogin=true" :isLogin="isLogin"
-      @emitIsLogin="formLogin = !formLogin; formRegister = false; formGoogle = false" @emitIsRegister="formRegister = !formRegister; formLogin = false; formGoogle = false"
-    >
-    </Google>
     <CardComponent v-if="isLogin"/></CardComponent>
   </div>
 </template>
@@ -22,7 +19,6 @@ import NavBar from './components/navbar/NavBar';
 import CardComponent from './components/CardList';
 import Login from './components/user/login';
 import Register from './components/user/register';
-import Google from './components/user/google.vue';
 
 export default {
   name: 'App',
@@ -31,14 +27,14 @@ export default {
     CardComponent,
     Login,
     Register,
-    Google
   },
   data() {
     return {
       isLogin: false,
       formRegister: false,
       formGoogle: false,
-      formLogin: true
+      formLogin: true,
+      withGoogle: false
     }
   },
   methods: {

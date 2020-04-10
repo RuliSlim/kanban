@@ -5,13 +5,14 @@
       <p class="title">{{task.title}}</p>
       <p>{{ task.description }} <br>
         created by {{ task.User.username }}
+        {{task.CategoryId}}
       </p>
       <div class="secondary-content options-task">
         <div class="row"> 
-          <ModalBtn :id="task.id" :title="task.title" :type="'edit'" @backToCard="getUpdate(task.id, $event, task)"><i class="large iconOption iconCollection material-icons">edit</i></ModalBtn>
+          <ModalBtn :task="task" :catId="catId" :type="'edit'" @backToCard="getUpdate(task.id, $event)"><i class="large iconOption iconCollection material-icons">edit</i></ModalBtn>
         </div>
         <div class="row"> 
-          <ModalBtn :id="task.id" :title="task.title" :type="'delete'" @backToCard="getRefresh(task.id)"><i class="large iconOption iconCollection material-icons">delete</i></ModalBtn>
+          <ModalBtn :task="task" :catId="catId" :type="'delete'" @backToCard="getRefresh(task.id)"><i class="large iconOption iconCollection material-icons">delete</i></ModalBtn>
         </div>
       </div>
     </li>
@@ -21,18 +22,34 @@
 <script>
 import ModalBtn from '../modals/ModalBtn.vue'
 export default {
-  props: ['catTasks'],
+  props: ['catTasks', 'catId'],
   components: {ModalBtn},
   methods: {
     getRefresh(id) {
       this.$emit('emitDelete', id);
-      // this.$parent.deleteTask(id);
     },
-    getUpdate(id, datas, task) {
-      let data = task;
-      data.title = datas;
-      let newData = {id, data};
+    getUpdate(id, datas) {
+      let newData = {id: id, 
+      title: datas.title, 
+      CategoryId: datas.CategoryId};
+      // newData.title = datas.title;
+      // newData.CategoryId = datas.CategoryId;
       this.$emit('emitUpdate', newData);
+      console.log(id, newData, 'DICARD');
+    },
+    editOne(id) {
+    axios({
+      methods: 'get',
+      url: 'http://localhost:3000/categories'
+    })
+      .then(res => {
+        this.cats = res.data;
+        // console.log(res, 'Dari edit')
+      })
+      .catch(err => {
+        // console.log(err.response)
+        this.$toasted.error(err.response.data.message)});
+
     }
   }
 }

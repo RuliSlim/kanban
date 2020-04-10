@@ -25,7 +25,10 @@ class TaskController {
       .then(tasks => {
         res.status(200).json({cats: foundCat, tasks});
       })
-      .catch(err => next(err));
+      .catch(err => {
+        console.log('masuk')
+        next(err)
+      });
   }
 
   static create(req, res, next) {

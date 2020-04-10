@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ['isLogin'],
+  props: ['isLogin', 'withGoogle'],
   name: 'NavBar',
   data() {
     return {
@@ -23,12 +23,21 @@ export default {
     logOut() {
       // this.isLogin = false;
       let self = this;
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
+      if(this.withGoogle) {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('username');
+          localStorage.removeItem('withgoogle');
+          self.$emit('emitLogout');
+        });
+      } else {
+          localStorage.removeItem('withgoogle');
         localStorage.removeItem('access_token');
         localStorage.removeItem('username');
         self.$emit('emitLogout');
-      });
+      }
     }
   }
 }

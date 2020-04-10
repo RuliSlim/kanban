@@ -1,7 +1,8 @@
 <template>
   <div>
     <ModalContent v-if="showModal" :open="showModal" :modalStyle="modalStyle" @close="showModal = false"
-      :id="id" :title="title" :type="type" @backToCard="backToCard($event)">
+      :type="type" @backToCard="backToCard($event)" :task="task" :catId="catId"
+    >
     </ModalContent>
     <btnTrigger @trigger="showModal = true"><slot></slot></btnTrigger>
   </div>
@@ -12,7 +13,7 @@
   import ModalContent from './Modal.vue'
   export default {
     name: 'Modal-btn',
-    props: ['id', 'title', 'type'],
+    props: ['task', 'type', 'catId'],
     data() {
       return {
         showModal: false,
@@ -32,6 +33,7 @@
     methods: {
       backToCard(data) {
         this.showModal = false;
+        console.log(data, 'masuk btn')
         this.$emit('backToCard', data);
       }
     },

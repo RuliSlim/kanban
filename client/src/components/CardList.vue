@@ -1,31 +1,10 @@
 <template>
-  <div class="container">
-    <div class="row" v-for="(catRow, idx) in listEachRow" :key="idx">
-      <div class="col s12 m6 l4" v-for="(cat, i) in catRow" :key="cat.id">
-        <ul class="collection with-header" >
-          <li class="collection-header">
-            <a href="#!" class="valign-wrapper" id="add-task"><i class="small iconOption iconCollection material-icons" ref="button" @click="showAdd(idx, i)">add_circle_outline</i></a> 
-            <h4>{{ cat.name }}</h4>
-          </li>
-          <li class="collection-item avatar input-task" :id="'input-' + i" ref="cats">
-            <div class="row">
-              <form class="col s12" ref="submitTask" ction enctype="multipart/form-data" @submit.prevent="createTask(idx, i)">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <label for="task" class="active">Add</label>
-                    <input :id="'task-' + cat.id" type="text" class="validate" placeholder="Task" ref="input-task" v-model="newTitle">
-                    <button type="submit" id="submit" class="waves-effect waves-teal btn-flat">
-                      <i class="material-icons">add_circle_outline</i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
-          <!-- -->
-          <Card :catTasks="cat.Tasks" @emitUpdate="updateTask($event)" @emitDelete="deleteTask($event)"/></Card>
-
-        </ul>
+  <div class="">
+    <div class="row">
+      <div class="col s12 l3 pisah" v-for="cat in cats">
+        <Category  :key="cat.id" :cat="cat"
+          @emitCreate="refresh"
+        ></Category> <!-- component category-->
       </div>
     </div>
   </div>
@@ -33,152 +12,48 @@
 
 <script>
 import axios from "axios";
-import Card from './card/Card.vue'
+import Category from './card/Category.vue';
 
-let base_url = "http://localhost:3000/tasks";
-// let token = localStorage.getItem("access_token");
-// console.log(token, 'YOu token')
+let base_url = "http://localhost:3000/";
+let token = localStorage.getItem("access_token");
 
 export default {
   name: 'CardComponent',
   components: {
-    Card
+    Category
   },
   data() {
     return{
       cats: [],
-      tasks: [],
-      listEachRow: [],
-      showForm: [],
-      newTitle: '',
-      error: null,
-      token: localStorage.getItem('access_token')
     }
   },
 
   methods: {
-    showAdd(idx, i) {
-      let index;
-      if (idx > 0) {
-        index = idx * 3
-      } else {
-        index = i
-      }
-      if (this.showForm[index] == undefined) {
-        this.showForm[index] = false;
-        this.showForm[index] = !this.showForm[index];
-      } else {
-        this.showForm[index] = !this.showForm[index];
-      }
-      if(this.showForm[index]) {
-        this.$refs.cats.forEach((el, idx) => {
-          if(idx != index) {
-            el.style.display = 'none';
-            this.showForm[idx] = false;
-          } else {
-            el.style.display = 'block';
-            this.showForm[idx] = true;
-          }
-        });
-      } else {
-        this.$refs.cats[i].style.display = 'none';
-      }
-    },
-    showEditForm(i) {
-      this.isDisabled[i] = !this.isDisabled[i];
-      this.terms = !this.terms;
-      this.editAble
-    },
-    // function to comunicate with db
     getAll() {
       axios({
         method: 'GET',
-        url: base_url,
+        url: base_url + 'tasks',
         headers: {
-          access_token: this.token
+          access_token: token
         }
       })
       .then(result => {
-          this.cats = result.data.cats;
-          this.listEachRow = this.chunkArray(this.cats, 3)
-          this.tasks = result.data.tasks;
-          this.tasks.forEach((el, i)=> {
-          this.showForm[i] = false;
-        })
+          console.log(result.data)
+          this.cats=result.data.cats
+          console.log(this.cats, 'YOu token')
       })
       .catch((err) => {
+        console.log(err)
         this.$toasted.error(err.response.data.message, {duration: 3000});
       })
     },
-    createTask(idx, id) {
-      let formdata = {
-        title: this.newTitle,
-        CategoryId: id+1
-      }
-      if(idx > 0) {
-        formdata.CategoryId = (id+1) + 3
-      }
-      axios({
-        method: "POST",
-        url: base_url, 
-        data: formdata, 
-        headers: {access_token: this.token} 
-      })
-        .then((res) => {
-          this.getAll();
-          this.newTitle = '';
-          this.$toasted.success(`Succesfully create ${res.data.task.title}`, {duration: 3000});
-        })
-        .catch(err => {
-          this.$toasted.error(err.response.data.message, {duration: 3000});
-        });
+    refresh(){
+      this.getAll()
     },
-    updateTask(datas) {
-      const {id, data} = datas;
-      axios({
-        method: 'PUT',
-        url: base_url + '/' + id,
-        data,
-        headers: {
-          access_token: this.token
-        }
-      })
-        .then((res) => {
-          this.getAll();
-          this.$toasted.success(`Succesfully update ${res.data[1][0].title}`, {duration: 3000});
-        })
-        .catch(err => {
-          this.$toasted.error(err.response.data.message, {duration: 3000});
-          this.getAll();
-        })
-    },
-    deleteTask(id) {
-      axios({
-        method: 'DELETE',
-        url: base_url + '/' + id, 
-        headers: {access_token: this.token}
-      })
-        .then((res) => {
-          this.getAll(); 
-          this.$toasted.success(`Succesfully delete ${res.data.title}`, {duration: 3000});
-        })
-        .catch(err => {
-          this.$toasted.error(err.response.data.message, {duration: 3000});
-          this.getAll();
-        })
-    },
-    // function to split category
-    chunkArray(myArray, chunk_size){
-      var results = [];
-      while (myArray.length) {
-        results.push(myArray.splice(0, chunk_size));
-      }
-      return results;
-    }
   },
   // lifecycle
   mounted() {
-    if(this.token) {
+    if(token) {
       this.getAll()
     }
   }

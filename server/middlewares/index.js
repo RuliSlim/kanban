@@ -29,6 +29,7 @@ const errorHandler = (err, req, res, next) => {
 }
 
 const authentication = (req, res, next) => {
+  console.log(req.headers)
   const token = req.headers.access_token;
   if(!token) throw new Error('You have to login');
   if(!decodedToken(token)) throw new Error('Invalid token');

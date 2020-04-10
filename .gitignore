@@ -7,3 +7,4 @@
 /client/dist
 /client/public/dist
 /client/public/.cache
+.cache
