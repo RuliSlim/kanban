@@ -44,6 +44,15 @@ class TaskController {
     .catch(err => next(err));
   }
 
+  static getOne(req, res, next) {
+    Task.findByPk(req.params.id)
+      .then(task => {
+        if(!task) throw new Error('Task not found')
+        res.status(200).json(task)
+      })
+      .catch(err => next(err));
+  }
+
   static updateOne(req, res, next) {
     const { title, description, CategoryId, status } = req.body;
     const { organization } = req.user;

@@ -17,7 +17,6 @@ ___________
 ___
 ## API
 1. Google Sign In
-2. [voicerss](http://www.voicerss.org/)
 ___
 ## Framework
 1. Materialize
