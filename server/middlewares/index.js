@@ -29,18 +29,22 @@ const errorHandler = (err, req, res, next) => {
 }
 
 const authentication = (req, res, next) => {
-  console.log(req.headers)
-  const token = req.headers.access_token;
-  if(!token) throw new Error('You have to login');
-  if(!decodedToken(token)) throw new Error('Invalid token');
-  const {id} = decodedToken(token);
-  User.findOne({ where: { id } })
-    .then(user => {
-      if(!user) throw new Error('User invalid');
-      req.user = user;
-      next();
-    })
-    .catch(err => next(err));
+  try{
+    console.log(req.headers)
+    const token = req.headers.access_token;
+    // if(!token) throw new Error('You have to login');
+    if(!decodedToken(token)) throw new Error('Invalid token');
+    const {id} = decodedToken(token);
+    User.findOne({ where: { id } })
+      .then(user => {
+        if(!user) throw new Error('User invalid');
+        req.user = user;
+        next();
+      })
+      .catch(err => next(err));
+  } catch(err) {
+    next(err => next(err));
+  }
 }
 
 const authorization = (req, res, next) => {

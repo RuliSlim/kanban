@@ -24,14 +24,16 @@ export default {
       // this.isLogin = false;
       let self = this;
       if(this.withGoogle) {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log('User signed out.');
+        this.$gAuth.signOut()
+        .then(() => {
+          this.$emit('emitLogout');
           localStorage.removeItem('access_token');
           localStorage.removeItem('username');
           localStorage.removeItem('withgoogle');
-          self.$emit('emitLogout');
-        });
+        })
+        .catch(err => {
+          this.$toasted.error(err.response.data.message, {duration: 3000});
+        })
       } else {
           localStorage.removeItem('withgoogle');
         localStorage.removeItem('access_token');
