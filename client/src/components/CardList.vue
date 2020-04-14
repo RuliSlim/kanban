@@ -14,9 +14,6 @@
 import axios from "axios";
 import Category from './card/Category.vue';
 
-let base_url = "https://kanbaaam.herokuapp.com/";
-let token = localStorage.getItem("access_token");
-
 export default {
   name: 'CardComponent',
   components: {
@@ -25,6 +22,8 @@ export default {
   data() {
     return{
       cats: [],
+      token: null,
+      base_url: "https://kanbaaam.herokuapp.com/"
     }
   },
 
@@ -32,18 +31,15 @@ export default {
     getAll() {
       axios({
         method: 'GET',
-        url: base_url + 'tasks',
+        url: this.base_url + 'tasks',
         headers: {
-          access_token: token
+          access_token: this.token
         }
       })
       .then(result => {
-          console.log(result.data)
-          this.cats=result.data.cats
-          console.log(this.cats, 'YOu token')
+        this.cats=result.data.cats
       })
       .catch((err) => {
-        console.log(err)
         this.$toasted.error(err.response.data.message, {duration: 3000});
       })
     },
@@ -53,7 +49,8 @@ export default {
   },
   // lifecycle
   mounted() {
-    if(token) {
+    this.token = localStorage.getItem('access_token')
+    if(this.token) {
       this.getAll()
     }
   }

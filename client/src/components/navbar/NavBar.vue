@@ -26,7 +26,7 @@ export default {
       if(this.withGoogle) {
         this.$gAuth.signOut()
         .then(() => {
-          this.$emit('emitLogout');
+          self.$emit('emitLogout');
           localStorage.removeItem('access_token');
           localStorage.removeItem('username');
           localStorage.removeItem('withgoogle');
@@ -35,7 +35,7 @@ export default {
           this.$toasted.error(err.response.data.message, {duration: 3000});
         })
       } else {
-          localStorage.removeItem('withgoogle');
+        localStorage.removeItem('withgoogle');
         localStorage.removeItem('access_token');
         localStorage.removeItem('username');
         self.$emit('emitLogout');

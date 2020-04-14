@@ -53,14 +53,13 @@ export default {
       let data = {};
       data.email = this.email;
       data.password = this.password;
-      this.axios(data, 'login');
+      this.vueAxios(data, 'login');
     },
     google(user) {
-      console.log('masuk')
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
-          let self = this;
+          // let self = this;
           axios({
             method: "post",
             url: "https://kanbaaam.herokuapp.com/user/google",
@@ -68,17 +67,16 @@ export default {
               token: GoogleUser.getAuthResponse().id_token
             }
           })
-          .then(function(response) {
+          .then((response) => {
               localStorage.setItem("access_token", response.data.access_token);
               localStorage.setItem("user",response.data.email);
-              self.$emit('emitWithGoogle');
+              this.$emit('emitWithGoogle');
           })
           .catch(err => {
             this.$toasted.error(err.response.data.message, {duration: 3000});
           });
         })
         .catch(err => {
-          console.log(err)
           this.$toasted.error(err.response.data.message, {duration: 3000})});
       
     },
@@ -98,7 +96,7 @@ export default {
         this.$emit('emitIsGoogle');
       }
     },
-    axios(data, url) {
+    vueAxios(data, url) {
       let self = this;
       let urlG = url
       axios({

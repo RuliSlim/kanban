@@ -1,16 +1,17 @@
 <template>
   <div>
     <NavBar :isLogin="isLogin" @emitLogout="logOut" :withGoogle="withGoogle"></NavBar>
+    
     <Login v-if="!isLogin && formLogin" @emitToken="isLogin=true" :isLogin="isLogin" 
       @emitIsRegister="formRegister = !formRegister; formLogin = false;"
-      @emitWithGoogle="isLogin=true"
+      @emitWithGoogle="loggedIn"
     >
     </Login>
     <Register v-if="!isLogin && formRegister" @emitToken="isLogin=true" :isLogin="isLogin"
       @emitIsLogin="formLogin = !formLogin; formRegister = false;" 
     >
     </Register>
-    <CardComponent v-if="isLogin"/></CardComponent>
+    <CardComponent v-if="isLogin"></CardComponent>
   </div>
 </template>
 
@@ -43,6 +44,10 @@ export default {
     },
     logOut() {
       this.isLogin = false;
+    },
+    loggedIn() {
+      this.isLogin = true;
+      this.withGoogle = true;
     }
   },
   created() {
